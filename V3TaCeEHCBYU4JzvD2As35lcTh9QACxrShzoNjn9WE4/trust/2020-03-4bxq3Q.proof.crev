@@ -1,0 +1,19 @@
+----- BEGIN CREV PROOF -----
+kind: trust
+version: -1
+date: "2020-03-08T17:53:46.274077-07:00"
+from:
+  id-type: crev
+  id: V3TaCeEHCBYU4JzvD2As35lcTh9QACxrShzoNjn9WE4
+  url: "https://github.com/Gaelan/crev-proofs"
+ids:
+  - id-type: crev
+    id: FYlr8YoYGVvDwHQxqEIs89reKKDy-oWisoO0qXXEfHE
+    url: "https://github.com/dpc/crev-proofs"
+trust: medium
+comment: |-
+  Primary author of cargo-crev.
+----- SIGN CREV PROOF -----
+046MH7R3oMu8XDCY2Y7r2UHC0WWkIlVRB1ifg35eagKEED42FA9RIQjJKFdTKG4mFRcIAyaBbu7Jz8X_1Eb9AA
+----- END CREV PROOF -----
+
