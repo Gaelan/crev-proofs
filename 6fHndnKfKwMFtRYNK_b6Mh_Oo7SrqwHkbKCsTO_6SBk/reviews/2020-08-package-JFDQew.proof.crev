@@ -1,0 +1,29 @@
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2020-08-20T03:32:08.894367-07:00"
+from:
+  id-type: crev
+  id: 6fHndnKfKwMFtRYNK_b6Mh_Oo7SrqwHkbKCsTO_6SBk
+  url: "https://github.com/Gaelan/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: shell-escape
+  version: 0.1.5
+  revision: 9bfec037f6fde99a7e4caf029919b0bb4b808c85
+  digest: aRvbB8m7HDX6Xx0CLfKREmHN1BgicrmOYIy-U9VN_TA
+package-diff-base:
+  source: "https://crates.io"
+  name: shell-escape
+  version: 0.1.4
+  digest: bijKKLMMvvWOJGvLm-VhJnO7baquEfQ7TUdFY64xIBo
+review:
+  thoroughness: low
+  understanding: medium
+  rating: positive
+comment: |-
+  Just a bugfix (which seems fine) over 0.1.4, which dpc trusts.  
+----- SIGN CREV PROOF -----
+nMAFWvJ5twQCIclHG5N6DcyVqKvQyXYnVICryaPzdLkTrHxetH-bN3vQy6arm7jQ9jlxyKKwjcz9desR7AotDw
+----- END CREV PROOF -----
+
