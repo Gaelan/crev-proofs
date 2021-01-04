@@ -1,0 +1,24 @@
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2021-01-04T12:39:31.902483-08:00"
+from:
+  id-type: crev
+  id: 6fHndnKfKwMFtRYNK_b6Mh_Oo7SrqwHkbKCsTO_6SBk
+  url: "https://github.com/Gaelan/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: futures-sink
+  version: 0.3.8
+  digest: 8Xw4vgixsYT5M2hrDGd1jEfhL0OhPzGIEEEAhGQ9JjA
+review:
+  thoroughness: low
+  understanding: medium
+  rating: positive
+comment: |-
+  Simple enough; a trait and a few trivial implementations. Two uses of unsafe
+  to get things out of Pins, which could be better commented but look fine.
+----- SIGN CREV PROOF -----
+sTZzXVJMTXyFR2liCA48tEqmv_rBMQgAx6Rde-jdGmoxMXdZsxVBHVtByXqCXkBP30au6THQYa1FoIWY28XRDg
+----- END CREV PROOF -----
+
