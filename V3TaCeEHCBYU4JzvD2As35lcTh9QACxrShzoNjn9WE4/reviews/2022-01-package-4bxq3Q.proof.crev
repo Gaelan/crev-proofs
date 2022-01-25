@@ -58,3 +58,29 @@ comment: |-
 w2ILE2JF4pNskxu3CmSsndqZ76fB6aZ-MZhYROAcI_E3BdnEdXjiZwhxbVXCVMy1ZQYncDS_-pJ0QXBWgPkdDA
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2022-01-25T14:14:02.296446+00:00"
+from:
+  id-type: crev
+  id: V3TaCeEHCBYU4JzvD2As35lcTh9QACxrShzoNjn9WE4
+  url: "https://github.com/Gaelan/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: unic-common
+  version: 0.9.0
+  revision: 5878605364af97a3358368a6eaef02104af2e016
+  digest: XpCscePQOyvzLUvE3BOkX0dcymQg-tz1cgHTFWd7ISg
+review:
+  thoroughness: low
+  understanding: medium
+  rating: positive
+comment: |-
+  Extremely simple crate. Defines a struct to represent a Unicode version
+  (three u16s) and, behind the "unstable" feature flag, code to convert from
+  the equivalent struct in std (which isn't actually unstable these days).
+----- SIGN CREV PROOF -----
+jQ5FmMOHoSLwLAW1kHtxeAeALNMqnpOmCWmOgXoiVk3aTxbx2WxQFf8o_xTgYDp-IwgEqvD2g_TUhkCpC7zXCQ
+----- END CREV PROOF -----
+
