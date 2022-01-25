@@ -1,0 +1,60 @@
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2022-01-25T13:16:22.916448+00:00"
+from:
+  id-type: crev
+  id: V3TaCeEHCBYU4JzvD2As35lcTh9QACxrShzoNjn9WE4
+  url: "https://github.com/Gaelan/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: vec_map
+  version: 0.8.2
+  revision: 9509befa7bc96a7f8bd202cc472dc9ecc23be890
+  digest: EkbG3E-9EGd-zkuTEY-7KwtPtrqOR9vRGzZoAKxa5DY
+review:
+  thoroughness: medium
+  understanding: medium
+  rating: positive
+comment: |-
+  TL;DR: Seems safe to use, but I'd avoid its serde and DoubleEndedIterator
+  implementations for now.
+  
+  Identical to 0.8.1 (which dpc approved), except that an unnecessary (but
+  harmless) shell script was removed from the crates.io upload, and line endings
+  were changed from CRLF to LF.
+  
+  The crate provides a VecMap data structure - just a Vec<Option<T>> that
+  provides a map-like interface (it also tracks the number of values present
+  for efficient len()). This has its obvious risks (maps with sparse
+  keys or a single very high key waste tons of memory), but could be useful
+  in some cases.
+  
+  No unsafe or other glaring issues. Looks to have reasonable testing.
+  
+  In maintainance mode, but this crate is probably "done" enough that it isn't
+  a huge issue.
+  
+  Some notes and nitpicks:
+  
+  - VecMap has a capacity() method (and other methods along those lines) that
+    access the capacity of the underlying Vec. This is a little confusing, as
+    the capacity of the Vec in this case isn't "the maximum number of values
+    that can be stored without realocating", as it it usually is, but "the
+    highest individual key that can be stored as reallocating". It's decently
+    well documented, though, and these are just normal methods with similar
+    names, not trait methods, so no contracts are getting violated.
+  - get() and friends could be written to be panic-free by construction
+    instead of with an explicit bounds check, but they're panic-free in any
+    case
+  - The DoubleEndedIterator implementations don't adjust self.yielded.
+    Unless I'm missing something, this means size_hint() is broken after
+    next_back() is called.
+  - I'm not sure about the serde implementation - it just derives the traits,
+    resulting in a map being serialized as (using JSON here for demonstration)
+    `{"n":2,"v":[null,null,null,null,null,6,null,8]}`. Surely it'd be better
+    to serialize as a native map, e.g. `{"5": 6, "7": 8}`?
+----- SIGN CREV PROOF -----
+w2ILE2JF4pNskxu3CmSsndqZ76fB6aZ-MZhYROAcI_E3BdnEdXjiZwhxbVXCVMy1ZQYncDS_-pJ0QXBWgPkdDA
+----- END CREV PROOF -----
+
