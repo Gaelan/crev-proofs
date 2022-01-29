@@ -153,3 +153,74 @@ comment: |-
 Sro1qCqu_sHC0DuO7GsFwUql2Z3WWGHOSffm5xOnwqUubixsOutB1n0hUmXZjYzytOU3DxC768ggJarJTRUpBQ
 ----- END CREV PROOF -----
 
+----- BEGIN CREV PROOF -----
+kind: package review
+version: -1
+date: "2022-01-29T17:57:49.634994+00:00"
+from:
+  id-type: crev
+  id: V3TaCeEHCBYU4JzvD2As35lcTh9QACxrShzoNjn9WE4
+  url: "https://github.com/Gaelan/crev-proofs"
+package:
+  source: "https://crates.io"
+  name: crates_io_api
+  version: 0.7.3
+  revision: 4bff104c7cb61dbf4b893507f0ded382f4133aec
+  digest: 4pSnfRHFi_-VVTNv5F7jkQPsSfxG5038meeU7TLVfYA
+review:
+  thoroughness: medium
+  understanding: medium
+  rating: positive
+comment: |-
+  [update to correct thoroughness]
+  
+  Wrapper around the crates.io API, using reqwest as the underlying HTTP client.
+  Seems reasonable and well maintained. No unsafe.
+  
+  Tries to be a polite client (rate limiting, etc) by default, which is nice to
+  see.
+  
+  I haven't tested this, or verified that the JSON structures it uses are
+  correct.
+  
+  Notes from code review:
+  - AsyncClient::new() panics if reqwest's initialization fails. This is
+    probably fine (some reqwest APIs panic in the same case), but given that
+    we're returning a Result anyway it seems sensible to pass it through.
+    Worth documenting, at the very least.
+  - Somewhat subtly, the lock on AsyncClient::last_request_time is used to
+    prevent multiple requests from firing at once. That deserves a comment.
+  - Bug with contrived invalid crate names:
+    https://github.com/theduke/crates-io-api/issues/44
+  - crate_reverse_dependencies() (actually its helper, ReverseDependencies::
+    from_recieved()) makes a copy of the Version struct for each reverse dep,
+    which is less than ideal for memory usage, especially if getting the rdeps
+    of a popular crate.
+  - full_crate() is similiarly likely to be a bad idea, as it calls
+    crate_reverse_dependencies() and also (optionally) makes two requests per
+    crate version. Maybe has its uses, though.
+  - Several methods (crate_reverse_dependencies(), full_crate(), all_crates(),
+    all_crates_full()) request all pages of a paginated list. This will, in
+    many cases, involve tens to hundreds of requests. Everything's rate
+    limited, so it won't hurt anything (other than taking a long time to
+    return), but I can't think of many cases where calling these methods is a
+    good idea. At least the docs are mostly clear about this.
+    - all_crates() and all_crates_full() at least returns a streams, do you 
+      can deal with their output incrementally.
+  - all_crates() uses floating point math with the total number of crates? That
+    seems ill-advised.
+  - The tests are a little weird - there are a few asserts, but mostly they
+    just print out information, presumably for human review. Works as a smoke
+    test, I guess.
+  - The sync client duplicates all the code from the async client. There's an
+    open issue about this. Interestingly, there's some inconsistency in
+    handling of errors that should never happen (e.g. parse errors on a
+    hardcoded URL) - the async client unwraps them, but the sync client passes
+    them up.
+  
+  TL;DR should be safe to use; some methods are probably a bad idea unless you
+  know what you're doing, but the docs make this clear.
+----- SIGN CREV PROOF -----
+UXGe7C1px-Shh7QmUZ5DbJsBpW-DhS2ob-nSbsIvWGrtsQfX3pGTktje30bluxA5UK0n0g99zcBW9rZbOXQMCw
+----- END CREV PROOF -----
+
